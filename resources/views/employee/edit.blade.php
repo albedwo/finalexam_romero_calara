@@ -1,13 +1,12 @@
+@extends('layouts.app')
+
 @section('content')
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-12">
-                    <h1 class="m-0">{{ __('Employee Update') }}</h1> 
-                    @if (session('status'))
-                      <div class="alert alert-success">{{session('status')}}</div>
-                  @endif
+                <div class="col-sm-6">
+                    <h1 class="m-0">{{ __('Employee Management') }}</h1>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -18,44 +17,61 @@
     <div class="content">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-6 m-auto">
-            <div class="card card-secondary">
-              <div class="card-header">
-                <h3 class="card-title">Edit Employee Information</h3>
+          @if (session('status'))
+              <div class="alert alert-success">{{session('status')}}</div>
+          @endif
+            <div class="col-6 m-auto">
+              <div class="card card-secondary">
+                <div class="card-header">
+                  <h3 class="card-title">Edit employee</h3>
+                </div>
+                <form  action="{{ route('employee.update', $employee->id) }}" method="POST">
+                  @csrf
+                  @method('PUT')
+                    <div class="row card-body col-12">
+                        <div class="form-group col-6">
+                          <label for="exampleInputPassword1">Lastname</label>
+                          <input type="text" class="form-control g-2" id="lname" name="lname" placeholder="Enter your Lastname" require>
+                        </div>
+                        <div class="form-group col-6">
+                          <label for="exampleInputPassword1">Middlename</label>
+                          <input type="text" class="form-control g-2" id="midname" name="mname" placeholder="Enter your Middlename" require>
+                        </div>
+                        @error('lname') <span class="text-danger">{{$message}}</span>@enderror
+                        @error('midname') <span class="text-danger">{{$message}}</span> @enderror  
+                        <div class="form-group col-12">
+                          <label for="exampleInputPassword1">FirstName</label>
+                          <input type="text" class="form-control" id="fname" name="fname" placeholder="Enter your First Name" value="{{ $employee->fname }}">
+                        </div>
+                          @error('fname') <span class="text-danger">{{$message}}</span> @enderror
+                        <div class="form-group col-12">
+                          <label for="exampleInputPassword1">Address</label>
+                          <input type="text" class="form-control" id="address" name="address" placeholder="House No. Street Name, Brgy, City" value="{{ $employee->address }} ">
+                        </div>
+                          @error('address') <div class="text-danger">{{ $message }}</div> @enderror
+                           <div class="form-group col-12">
+                          <label for="exampleInputPassword1">Contact Number</label>
+                          <input type="text" class="form-control" id="contactno" name="contactno" placeholder="Enter your Contact Number" value="{{ $employee->contactno }}">
+                        </div>
+                          @error('contactno') <div class="text-danger">{{ $message }}</div> @enderror
+                        <div class="form-group col-6">
+                          <label for="exampleInputPassword1">Date of Birth</label>
+                          <input type="date" class="form-control" id="dob" name="dob" placeholder="YYYY-MM-DD" value="{{ $employee->dob }}"> <br>
+                          @error('dob') <div class="text-danger">{{ $message }}</div> @enderror
+                        </div>
+                        <div class="form-group col-6">
+                        </div>
+                        <button type="submit" class="btn btn-success col-6 m-auto">Update Employee Record</button>
+                      </div>
+                    </div>  
+                </form>
+                <!-- /.card-body -->
               </div>
-              <form>
-                <div class="row card-body col-12">
-                  <div class="form-group col-12">
-                    <label
-                        for="exampleInputEmail1">First Name
-                    </label>
-                        <input type="text" class="form-control g-2" id="fname" name="fname" placeholder="Enter your Firstname" require value="{{ $employees->fname}}">
-                  </div>                  
-                <div class="form-group col-12">
-                  <label for="exampleInputPassword1">Last Name</label>
-                  <input type="text" class="form-control" id="lname" name="lname" placeholder="Enter your Last Name"
-                  value="{{ $employees->lname}}">
-                </div>
-                <div class="form-group col-12">
-                    <label for="exampleInputFile">Middle Name</label>
-                  <input type="text" class="form-control" id="midname" name="midname" placeholder="Enter your Middle Name"
-                  value="{{ $employees->midname}}">
-                </div>
-                <div class="form-group col-12">
-                  <label for="exampleInputEmail1">Address</label>
-                  <input type="text" class="form-control" id="address" name="address" placeholder="Enter Address" value="{{ $employees->address}}">
-                </div>
-                <div class="form-group col-6">
-                  <label for="exampleInputPassword1">Zip</label>
-                  <input type="number" class="form-control" id="zip" name="zip" placeholder="" value="{{ $employees->zip}}">
-                </div>
-                <div class="form-group col-6">
-                  <label for="exampleInputPassword1">Age</label>
-                  <input type="number" class="form-control" id="age" name="age" placeholder="" value="{{ $employees->age}}">
-                </div>
-                <div class="form-group col-6">
-                  <button type="submit" class="btn btn-success col-12">Update Student Record</button>
-                </div>
-              </form>
-      
+            </div>
+          </div>
+        </div><!-- /.container-fluid -->
+      </div>
+    </div>
+  </div>
+    <!-- /.content -->
 @endsection
