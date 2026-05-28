@@ -33,5 +33,35 @@ class employeecontroller extends Controller
         return redirect()->route('employee.index')->with('success', 'Employee created successfully.');
     }
 
+    public function edit($id)
+    {
+        $employee = employee::findOrFail($id);
+        return view('employee.edit', compact('employee'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'fname' => 'required',
+            'lname' => 'required',
+            'mname' => 'required',
+            'address' => 'required',
+            'dob' => 'required|date',
+            'contactno' => 'required'
+        ]);
+
+        $employee = employee::findOrFail($id);
+        $employee->update($request->all());
+
+        return redirect()->route('employee.index')->with('success', 'Employee updated successfully.');
+    }
+
+    public function destroy($id)
+    {
+        $employee = employee::findOrFail($id);
+        $employee->delete();
+
+        return redirect()->route('employee.index')->with('success', 'Employee deleted successfully.');
+    }
     
 }

@@ -45,8 +45,12 @@
                                             <td>{{ $emp->dob }}</td>
                                             <td>{{ $emp->contactno }}</td>
                                             <td> 
-                                                <a href="#" class="btn btn-primary btn-md active" role="button" aria-pressed="true">Edit</a>
-                                                <a href="#" class="btn btn-danger btn-md active" role="button" aria-pressed="true">Delete</a>
+                                                <a href="{{ route('employee.edit', $emp->id) }}" class="btn btn-primary btn-md active" role="button" aria-pressed="true">Edit</a>
+                                                <form action="{{ route('employee.destroy', $emp->id) }}" method="POST" style="display: inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-md active" role="button" aria-pressed="true">Delete</button>
+                                                </form>
                                             </td>
                                         </tr>
                                         @endforeach
