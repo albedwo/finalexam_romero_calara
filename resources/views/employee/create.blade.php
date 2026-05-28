@@ -48,6 +48,11 @@
                           <input type="text" class="form-control" id="address" name="address" placeholder="House No. Street Name, Brgy, City">
                         </div>
                           @error('address') <div class="text-danger">{{ $message }}</div> @enderror
+                           <div class="form-group col-12">
+                          <label for="exampleInputPassword1">Contact Number</label>
+                          <input type="text" class="form-control" id="contactno" name="contactno" placeholder="Enter your Contact Number">
+                        </div>
+                          @error('contactno') <div class="text-danger">{{ $message }}</div> @enderror
                         <div class="form-group col-6">
                           <label for="exampleInputPassword1">Date of Birth</label>
                           <input type="date" class="form-control" id="dob" name="dob" placeholder="YYYY-MM-DD"> <br>
@@ -57,7 +62,7 @@
                         </div>
                         <button type="submit" class="btn btn-success col-6 m-auto">Submit Student Record</button>
                       </div>
-                    </div>
+                    </div>  
                 </form>
                 <!-- /.card-body -->
               </div>
